@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f2f5fb">
+<title>Конструктор ТЗ для ИИ-помощника — ТЗ и 7 поручений</title>
+<meta name="description" content="Опишите будущего ИИ-помощника в семи полях и получите структурированное техническое задание и семь готовых поручений для нейросети. Без регистрации.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Конструктор ТЗ для ИИ-помощника">
+<meta property="og:description" content="Семь полей о помощнике — готовое техническое задание и семь поручений для нейросети.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a55d6'/%3E%3Cpath d='M18 22h28M32 22v22' stroke='%23fff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f2f5fb;
+  --paper:#ffffff;
+  --ink:#14213a;
+  --muted:#55647c;
+  --accent:#2a55d6;
+  --accent-dark:#1e43b4;
+  --accent-soft:#e9efff;
+  --line:#d9e1ef;
+  --line-strong:#b9c6dd;
+  --soft:#f6f8fd;
+  --ok:#166a45;
+  --error:#a72436;
+  --radius:20px;
+  --shadow:0 12px 34px rgba(20,33,58,.07);
+  --font:"Segoe UI Variable",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Code","Cascadia Mono",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.6;
+  background:
+    radial-gradient(1100px 620px at 82% -12%,#e4ecff 0%,rgba(228,236,255,0) 62%),
+    radial-gradient(900px 520px at -8% 24%,#edf3ff 0%,rgba(237,243,255,0) 58%),
+    var(--bg);
+}
+body.modal-open{overflow:hidden}
+body.has-cookie{padding-bottom:150px}
+main{max-width:880px;margin:0 auto;padding:52px 22px 30px}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(32px,5.6vw,50px);line-height:1.06;letter-spacing:-.022em;font-weight:800;margin:14px 0 18px;text-wrap:balance}
+h2{font-size:clamp(23px,3.4vw,29px);line-height:1.2;letter-spacing:-.01em;font-weight:750}
+h3{font-size:19px;line-height:1.3;font-weight:700}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-dark);background:var(--accent-soft);border:1px solid #d3dfff;padding:7px 12px;border-radius:999px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.lead{font-size:18.5px;line-height:1.55;color:var(--muted);max-width:660px;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.chips li{font-size:12.5px;font-weight:600;color:#35435c;background:#fff;border:1px solid var(--line);padding:6px 11px;border-radius:999px}
+.steps{font-size:13.5px;color:var(--muted);margin:0 0 30px;padding:12px 16px;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),rgba(233,239,255,.25));border-radius:0 12px 12px 0}
+.steps b{color:var(--ink);font-weight:700}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.block{margin-top:26px}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.block-head p{font-size:14px;color:var(--muted)}
+.block-head h2{font-size:22px}
+.preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:26px}
+.preset{display:flex;align-items:flex-start;gap:13px;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px;min-height:96px;transition:border-color .15s,box-shadow .15s,transform .1s,background .15s}
+.preset:hover{border-color:#b6c5e8;box-shadow:0 8px 24px rgba(20,33,58,.07);transform:translateY(-1px)}
+.preset:active{transform:translateY(0)}
+.preset[aria-pressed="true"]{border-color:var(--accent);background:linear-gradient(180deg,#fff,#f5f8ff);box-shadow:0 0 0 3px rgba(42,85,214,.13)}
+.preset-icon{flex:0 0 auto;width:38px;height:38px;border-radius:11px;background:var(--accent-soft);color:var(--accent-dark);display:grid;place-items:center}
+.preset-icon svg{width:21px;height:21px}
+.preset-title{display:block;font-size:15.5px;font-weight:700;line-height:1.3;margin-bottom:3px}
+.preset-desc{display:block;font-size:12.8px;line-height:1.45;color:var(--muted);font-weight:400}
+.form-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.form-head p{font-size:14px;color:var(--muted)}
+.form-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 14px;background:var(--soft);border:1px solid var(--line);border-radius:12px;margin-bottom:14px}
+.progress{font-size:13px;color:var(--muted);font-weight:600}
+.progress.is-done{color:var(--ok)}
+.draft-box{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.draft-status{font-size:12.5px;color:var(--muted)}
+.form-status{margin:0 0 18px;padding:11px 14px;font-size:14px;color:#28406b;background:var(--accent-soft);border-radius:10px;border:1px solid #d8e3ff}
+.field{margin:0 0 24px}
+.field-label{display:flex;align-items:flex-start;gap:10px;font-size:17px;line-height:1.35;font-weight:700}
+.field-number{flex:0 0 auto;min-width:30px;height:26px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:750;color:var(--accent-dark);background:var(--accent-soft);border-radius:8px;margin-top:1px}
+.req{margin-left:auto;flex:0 0 auto;font-size:10.5px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:#f4f7fc;border:1px solid var(--line);padding:3px 8px;border-radius:999px;white-space:nowrap;margin-top:3px}
+.req.is-required{color:var(--accent-dark);background:var(--accent-soft);border-color:#d3dfff}
+.field-hint{font-size:13.5px;line-height:1.5;color:var(--muted);margin:8px 0 10px}
+textarea{display:block;width:100%;min-height:112px;resize:vertical;padding:13px 14px;border:1px solid var(--line-strong);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:15.5px;line-height:1.55;overflow-wrap:anywhere;white-space:pre-wrap;transition:border-color .15s,box-shadow .15s}
+textarea::placeholder{color:#6c7b92;opacity:1}
+textarea[aria-invalid="true"]{border-color:var(--error);box-shadow:0 0 0 3px rgba(167,36,54,.08)}
+.error{font-size:13.5px;color:var(--error);margin-top:6px}
+.consent{display:flex;align-items:flex-start;gap:11px;padding:15px 16px;background:#fbfcff;border:1px solid var(--line);border-radius:13px;font-size:13.5px;line-height:1.55}
+.consent.invalid{border-color:var(--error);background:#fff8f9}
+.consent input{flex:0 0 auto;width:18px;height:18px;margin:3px 0 0;accent-color:var(--accent)}
+.consent label{display:block;cursor:pointer}
+.consent a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:2px}
+.consent a:hover{text-decoration-thickness:2px}
+.form-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:20px}
+.form-note{font-size:12.5px;line-height:1.5;color:var(--muted);max-width:480px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:11px 19px;border:1px solid transparent;border-radius:11px;font-weight:650;font-size:15px;text-decoration:none;transition:background .15s,border-color .15s,transform .1s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(42,85,214,.22)}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-secondary{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-secondary:hover{background:var(--soft);border-color:var(--line-strong)}
+.btn-sm{min-height:38px;padding:8px 14px;font-size:13.5px;border-radius:9px}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);font-size:12.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px;min-height:auto}
+.linkbtn:hover{color:var(--ink)}
+.btn:focus-visible,.preset:focus-visible,.linkbtn:focus-visible,textarea:focus-visible,input:focus-visible,a:focus-visible,.client:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+textarea:focus-visible{outline-offset:2px}
+#result{scroll-margin-top:22px}
+.result-badge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:750;letter-spacing:.06em;text-transform:uppercase;color:var(--ok);background:#eaf7f0;border:1px solid #c6e8d7;padding:5px 10px;border-radius:999px}
+.result-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.result-desc{margin:10px 0 18px;color:var(--muted);font-size:15px}
+.output-label{display:block;font-size:12px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+#tz-output{height:400px;min-height:260px;font-family:var(--mono);font-size:13.5px;line-height:1.6;background:#fafcff;border-color:var(--line)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.status{min-height:22px;font-size:13.5px;color:var(--muted);margin-top:6px}
+.task-panel{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.task-panel h3{margin-bottom:6px}
+.task-panel>p{color:var(--muted);font-size:14px;margin-bottom:15px}
+.task-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.task-button{display:flex;align-items:flex-start;gap:11px;width:100%;min-height:64px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px 14px;font-weight:600;font-size:14.5px;line-height:1.35;transition:background .15s,border-color .15s,transform .1s}
+.task-button:hover{background:var(--soft);border-color:#bfcdea}
+.task-button:active{transform:translateY(1px)}
+.task-index{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:27px;height:27px;border-radius:8px;background:var(--accent-soft);color:var(--accent-dark);font-size:12px;font-weight:750;line-height:1}
+.task-text{display:block;padding-top:2px}
+.usage{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+footer{padding:30px 6px 0;color:var(--muted);font-size:13px}
+.footer-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:12px}
+.footer-links a,.footer-links button{color:var(--muted);font-size:13px;text-decoration:underline;text-underline-offset:3px;background:none;border:0;padding:0}
+.footer-links a:hover,.footer-links button:hover{color:var(--ink)}
+.footer-operator{font-size:12.5px;margin-bottom:8px;overflow-wrap:anywhere}
+.footer-note{font-size:12.5px;line-height:1.5;margin-bottom:6px}
+.nojs{margin-top:16px;padding:14px;background:#fff4e5;border:1px solid #f0d9b5;border-radius:10px;font-size:14px}
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:30;display:flex;align-items:center;gap:16px;max-width:880px;margin:0 auto;padding:15px 18px;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:0 18px 50px rgba(20,33,58,.2)}
+.cookie p{flex:1;margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.cookie-actions{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.modal{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:18px}
+.modal[hidden]{display:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(12,21,40,.5);backdrop-filter:blur(2px)}
+.modal-card{position:relative;width:min(100%,720px);max-height:min(92vh,880px);overflow:auto;overscroll-behavior:contain;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 26px 70px rgba(12,21,40,.28)}
+.modal-card.task-card{width:min(100%,780px)}
+.modal-card h2{margin:0 46px 10px 0;font-size:24px}
+.modal-close{position:absolute;right:14px;top:14px;width:38px;height:38px;min-height:38px;padding:0;border-radius:10px;font-size:20px;line-height:1;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.modal-close:hover{background:var(--soft);color:var(--ink)}
+.modal-eyebrow{margin-bottom:6px}
+.modal-note{color:var(--muted);font-size:14px;margin-bottom:18px}
+.modal-label{display:block;font-size:12px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
+.task-card textarea{font-size:14px}
+#task-tz{height:190px;min-height:140px}
+#task-output{height:300px;min-height:200px;font-family:var(--mono);font-size:13px;line-height:1.55;background:#fafcff}
+.doc{font-size:14.5px;line-height:1.65;color:#33415c}
+.doc h3{font-size:16px;margin:20px 0 8px;color:var(--ink)}
+.doc p{margin:0 0 10px}
+.doc ul{margin:0 0 12px;padding-left:20px}
+.doc li{margin-bottom:6px}
+.doc b{color:var(--ink)}
+.doc .doc-meta{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+@media(max-width:700px){
+  .preset-grid,.task-grid{grid-template-columns:1fr}
+  main{padding:32px 16px 24px}
+  .card{padding:22px 18px}
+  .lead{font-size:16.5px}
+  .field-label{font-size:16px;flex-wrap:wrap}
+  .req{margin-left:40px}
+  .form-footer{flex-direction:column;align-items:stretch}
+  .form-footer .btn{width:100%}
+  .actions{flex-direction:column}
+  .actions .btn{width:100%}
+  .cookie{flex-direction:column;align-items:stretch;gap:12px;left:12px;right:12px;bottom:12px}
+  .cookie-actions{justify-content:space-between}
+  .modal{padding:10px}
+  .modal-card{padding:22px 18px;border-radius:16px}
+  .form-tools{align-items:flex-start;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto!important}
+}
+@media(prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">ТЗ + 7 поручений для нейросети</p>
+    <h1>Конструктор ТЗ для ИИ-помощника</h1>
+    <p class="lead">Опишите будущего помощника в семи полях — получите структурированное техническое задание и готовые поручения для нейросети.</p>
+    <ul class="chips">
+      <li>Без регистрации</li>
+      <li>Данные остаются в браузере</li>
+      <li>7 готовых поручений</li>
+    </ul>
+    <p class="steps"><b>Заполните поля</b> → соберите ТЗ → выберите первое поручение</p>
+  </header>
+
+  <section class="block" aria-labelledby="presets-title">
+    <div class="block-head">
+      <h2 id="presets-title">Начните с шаблона</h2>
+      <p>Поля заполнятся примером — правьте под свой проект.</p>
+    </div>
+    <div class="preset-grid" id="preset-grid"></div>
+  </section>
+
+  <section class="card" id="form-card" aria-label="Данные о помощнике">
+    <div class="form-head">
+      <h2>Семь полей о вашем помощнике</h2>
+      <p>Обязательные отмечены в заголовках</p>
+    </div>
+    <div class="form-tools">
+      <p class="progress" id="progress">Заполнено 0 из 5 обязательных полей</p>
+      <div class="draft-box">
+        <span class="draft-status" id="draft-status" role="status" aria-live="polite"></span>
+        <button type="button" class="linkbtn" id="clear-draft">Очистить черновик</button>
+      </div>
+    </div>
+    <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
+    <form id="tz-form" novalidate>
+      <div class="field">
+        <label class="field-label" for="purpose"><span class="field-number">01</span>Назначение и роль помощника<span class="req is-required">Обязательно</span></label>
+        <p class="field-hint" id="purpose-hint">Кто этот помощник и какую задачу решает: продажи, поддержка, запись, внутренние процессы. Укажите бизнес-цель и границы роли.</p>
+        <textarea id="purpose" name="purpose" rows="4" required aria-required="true" aria-describedby="purpose-hint purpose-error" placeholder="Например: помощник отдела продаж онлайн-школы. Принимает заявки с сайта, квалифицирует и передаёт менеджеру."></textarea>
+        <p class="error" id="purpose-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="audience"><span class="field-number">02</span>Аудитория и контекст общения<span class="req is-required">Обязательно</span></label>
+        <p class="field-hint" id="audience-hint">Кто пишет помощнику, в каком состоянии и с какими типичными трудностями. Это влияет на тон, темп и глубину вопросов.</p>
+        <textarea id="audience" name="audience" rows="4" required aria-required="true" aria-describedby="audience-hint audience-error" placeholder="Например: взрослые 30–50 лет, выбирают курс для смены профессии, боятся потратить деньги впустую, пишут с телефона вечером."></textarea>
+        <p class="error" id="audience-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="channels"><span class="field-number">03</span>Каналы и интеграции<span class="req is-required">Обязательно</span></label>
+        <p class="field-hint" id="channels-hint">Где работает помощник (сайт, Telegram, WhatsApp, CRM) и к каким системам нужен доступ: база знаний, расписание, таблицы, уведомления.</p>
+        <textarea id="channels" name="channels" rows="4" required aria-required="true" aria-describedby="channels-hint channels-error" placeholder="Например: виджет на сайте и Telegram-бот. Интеграции: amoCRM, Google Таблица с ценами, уведомления менеджеру в Telegram."></textarea>
+        <p class="error" id="channels-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="scenarios"><span class="field-number">04</span>Сценарии и логика диалога<span class="req is-required">Обязательно</span></label>
+        <p class="field-hint" id="scenarios-hint">Какие шаги должен пройти разговор: приветствие, квалификация, ответы на частые вопросы, сбор контактов, запись, передача.</p>
+        <textarea id="scenarios" name="scenarios" rows="4" required aria-required="true" aria-describedby="scenarios-hint scenarios-error" placeholder="Например: поздороваться → узнать задачу → подобрать программу → собрать имя и телефон → создать сделку → передать менеджеру."></textarea>
+        <p class="error" id="scenarios-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="escalation"><span class="field-number">05</span>Эскалация на человека<span class="req">Необязательно</span></label>
+        <p class="field-hint" id="escalation-hint">В каких случаях помощник обязан передать диалог сотруднику и что при этом передать: резюме, контакт, категорию обращения.</p>
+        <textarea id="escalation" name="escalation" rows="3" aria-describedby="escalation-hint escalation-error" placeholder="Например: при просьбе позвать человека, вопросе вне базы знаний, жалобе или повторном обращении — передать оператору с кратким резюме."></textarea>
+        <p class="error" id="escalation-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="tone"><span class="field-number">06</span>Тональность, стиль и запреты<span class="req is-required">Обязательно</span></label>
+        <p class="field-hint" id="tone-hint">Как помощник говорит (на «вы» или «ты», деловой или дружелюбный, эмодзи) и что ему запрещено: выдумывать цены, сроки, отзывы, сравнивать с конкурентами.</p>
+        <textarea id="tone" name="tone" rows="4" required aria-required="true" aria-describedby="tone-hint tone-error" placeholder="Например: спокойно, на «вы», без давления и эмодзи. Запрещено называть точную цену, обещать скидки, придумывать отзывы и гарантии."></textarea>
+        <p class="error" id="tone-error" hidden></p>
+      </div>
+      <div class="field">
+        <label class="field-label" for="metrics"><span class="field-number">07</span>Критерии приёмки и метрики<span class="req">Необязательно</span></label>
+        <p class="field-hint" id="metrics-hint">По каким показателям вы примете работу: доля диалогов с контактом, точность ответов, время реакции, обязательные поля в CRM.</p>
+        <textarea id="metrics" name="metrics" rows="3" aria-describedby="metrics-hint metrics-error" placeholder="Например: не менее 70% диалогов с собранным телефоном, 100% ответов без выдуманных фактов, создание сделки в CRM."></textarea>
+        <p class="error" id="metrics-error" hidden></p>
+      </div>
+
+      <div class="consent" id="consent-wrap">
+        <input type="checkbox" id="consent" required aria-describedby="consent-error">
+        <label for="consent">Я даю согласие на обработку персональных данных на условиях <a href="#" data-doc="consent">Согласия</a>, принимаю <a href="#" data-doc="policy">Политику конфиденциальности</a> и <a href="#" data-doc="agreement">Пользовательское соглашение</a>. Понимаю, что введённые данные сохраняются только в моём браузере.</label>
+      </div>
+      <p class="error" id="consent-error" hidden>Отметьте согласие, чтобы собрать ТЗ.</p>
+
+      <div class="form-footer">
+        <p class="form-note">Не указывайте пароли, платёжные данные, ключи API и персональные данные клиентов. Черновик хранится локально и не отправляется на сервер.</p>
+        <button type="submit" class="btn btn-primary">Собрать ТЗ</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card block" id="result" aria-labelledby="result-title" hidden>
+    <span class="result-badge">Готово</span>
+    <h2 id="result-title" tabindex="-1" style="margin-top:10px">Техническое задание готово</h2>
+    <p class="result-desc">Скопируйте текст в чат с нейросетью или скачайте файл. Дальше выберите готовое поручение — ТЗ подставится автоматически.</p>
+    <label class="output-label" for="tz-output">Текст технического задания</label>
+    <textarea id="tz-output" readonly spellcheck="false"></textarea>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="copy-tz">Скопировать ТЗ</button>
+      <button type="button" class="btn btn-secondary" id="download-txt">Скачать .txt</button>
+      <button type="button" class="btn btn-secondary" id="download-md">Скачать .md</button>
+    </div>
+    <p class="status" id="copy-status" role="status" aria-live="polite"></p>
+
+    <div class="task-panel" aria-labelledby="task-panel-title">
+      <h3 id="task-panel-title">Выберите первое поручение для нейросети</h3>
+      <p>Страница соберёт готовый промпт: ТЗ плюс конкретная задача. Подходит для ChatGPT, Claude, Gemini, DeepSeek и других чатов.</p>
+      <div class="task-grid" id="task-grid"></div>
+    </div>
+
+    <p class="usage">В новом чате передайте ТЗ или поручение снова: страница не настраивает память нейросети.</p>
+  </section>
+
+  <noscript><p class="nojs">Для работы конструктора включите JavaScript в браузере.</p></noscript>
+
+  <footer>
+    <nav class="footer-links" aria-label="Правовые документы">
+      <a href="#" data-doc="policy">Политика конфиденциальности</a>
+      <a href="#" data-doc="consent">Согласие на обработку ПД</a>
+      <a href="#" data-doc="agreement">Пользовательское соглашение</a>
+      <a href="#" data-doc="cookies">Cookie и localStorage</a>
+    </nav>
+    <p class="footer-operator">Оператор: <span id="op-name"></span> · ИНН <span id="op-inn"></span> · <span id="op-email"></span></p>
+    <p class="footer-note">Сервис создаёт черновик технического задания. Он не заменяет юридическую экспертизу и не гарантирует результат работы сторонних нейросетей.</p>
+    <p class="footer-note">© <span id="year"></span> <span id="op-short"></span>. Все права на интерфейс и шаблоны принадлежат оператору.</p>
+  </footer>
+</main>
+
+<aside class="cookie" id="cookie-banner" aria-label="Уведомление о локальном хранении" hidden>
+  <p>Сайт не использует аналитику и сторонние cookie. В localStorage браузера хранятся только отметка об этом уведомлении и черновик ваших полей. Данные не покидают устройство. <a href="#" data-doc="cookies">Подробнее</a></p>
+  <div class="cookie-actions">
+    <button type="button" class="btn btn-primary btn-sm" id="cookie-ok">Понятно</button>
+  </div>
+</aside>
+
+<div class="modal" id="legal-modal" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <section class="modal-card doc-card" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+    <button type="button" class="modal-close" data-close-modal aria-label="Закрыть окно">×</button>
+    <h2 id="legal-title" tabindex="-1"></h2>
+    <div class="doc" id="legal-content"></div>
+  </section>
+</div>
+
+<div class="modal" id="task-modal" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <section class="modal-card task-card" role="dialog" aria-modal="true" aria-labelledby="task-title">
+    <button type="button" class="modal-close" data-close-modal aria-label="Закрыть окно">×</button>
+    <p class="eyebrow modal-eyebrow">Поручение для нейросети</p>
+    <h2 id="task-title" tabindex="-1"></h2>
+    <p class="modal-note">ТЗ уже подставлено. Можно отредактировать текст, если хотите использовать другую версию.</p>
+    <label class="modal-label" for="task-tz">Техническое задание</label>
+    <textarea id="task-tz" spellcheck="false"></textarea>
+    <label class="modal-label" for="task-output">Готовый текст для ИИ</label>
+    <textarea id="task-output" readonly spellcheck="false"></textarea>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" id="task-copy">Скопировать поручение</button>
+      <button type="button" class="btn btn-secondary" id="task-download">Скачать .txt</button>
+    </div>
+    <p class="status" id="task-copy-status" role="status" aria-live="polite"></p>
+  </section>
+</div>
+
+<script>
+"use strict";
+(function(){
+  const OPERATOR = {
+    name: "ИП Сметанин Виктор Александрович",
+    short: "ИП Сметанин В.А.",
+    inn: "024200905159",
+    ogrn: "304024208400112",
+    address: "Республика Башкортостан, с. Новая Отрадовка",
+    email: "viktor260566@gmail.com",
+    responsible: "ИП Сметанин Виктор Александрович"
+  };
+  const SITE = "https://aismetanin.ru/konstruktor-tz/";
+  const STORAGE_DRAFT = "tzAiDraftV1";
+  const STORAGE_COOKIE = "tzAiCookieAckV1";
+  const EDITED = "25 октября 2026 г.";
+  const KEYS = ["purpose", "audience", "channels", "scenarios", "escalation", "tone", "metrics"];
+  const REQUIRED = [0, 1, 2, 3, 5];
+  const MISSING = "Не указано. При необходимости уточни у меня.";
+
+  const PRESETS = [
+    {
+      id: "sales",
+      title: "Лидогенератор и квалификатор",
+      desc: "Принимает заявки, задаёт вопросы и передаёт тёплый контакт менеджеру.",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"></rect><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"></path></svg>',
+      values: [
+        "Я владелец студии ремонта квартир «Ровно» в Екатеринбурге. Помощник нужен, чтобы принимать входящие заявки с сайта и рекламы, квалифицировать их и передавать менеджеру.",
+        "Люди, которые планируют ремонт квартиры: чаще 30–55 лет, сравнивают двух-трёх подрядчиков, боятся срыва сроков и скрытых доплат. Пишут с телефона, часто вечером.",
+        "Виджет на сайте, Telegram-бот и WhatsApp. Интеграции: amoCRM (создание сделки и задачи), Google Таблица с ценами, уведомление менеджеру в Telegram.",
+        "Приветствие → выяснить тип объекта и площадь → понять сроки и бюджет → предложить бесплатный замер → собрать имя и телефон → создать сделку в CRM и передать менеджеру. Ответить на частые вопросы о сроках, гарантии, оплате и этапах.",
+        "Если клиент просит живого специалиста, задаёт вопрос вне базы знаний, сообщает о браке или аварии либо повторяет вопрос третий раз — передать менеджеру с кратким резюме диалога. Если менеджеры недоступны, взять контакт и пообещать ответ в рабочее время.",
+        "Спокойный деловой стиль, обращение на «вы», без эмодзи и давления. Запрещено: называть точную цену без замера, обещать скидки и сроки, придумывать отзывы и кейсы, сравнивать с конкурентами, гарантировать результат.",
+        "Не менее 80% диалогов с собранным телефоном; 100% созданных сделок с корректными полями; ответы на частые вопросы без выдуманных фактов; передача оператору не позже одной минуты после запроса."
+      ]
+    },
+    {
+      id: "support",
+      title: "Поддержка первой линии",
+      desc: "Закрывает типовые обращения по регламентам и создаёт тикеты.",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"></path><path d="M4 13h3v5H5a1 1 0 0 1-1-1zM20 13h-3v5h2a1 1 0 0 0 1-1z"></path><path d="M17 18v1a3 3 0 0 1-3 3h-2"></path></svg>',
+      values: [
+        "Я руководитель клиентского сервиса интернет-магазина товаров для дома. Помощник нужен, чтобы закрывать типовые обращения первой линии и разгрузить операторов.",
+        "Покупатели с активными заказами и те, кто выбирает товар. Пишут про статус доставки, возврат, брак, комплектацию и оплату. Часто раздражены, если заказ задерживается.",
+        "Чат на сайте и Telegram. Интеграции: база знаний с регламентами, API заказов для статуса по номеру, Bitrix24 для тикетов.",
+        "Идентификация по номеру заказа или e-mail → определить тему → ответить по регламенту → если нужен возврат или брак, собрать фото и данные → создать тикет → сообщить срок ответа.",
+        "Передавать оператору при просьбе человека, угрозе жалобы или суда, сумме спора выше 10 000 ₽, повторном обращении по тому же вопросу и любом вопросе вне базы знаний.",
+        "Вежливо, коротко, без канцелярита, на «вы». Запрещено: обещать компенсации и сроки возврата денег, подтверждать статус без данных из API, давать юридические консультации, раскрывать внутренние регламенты.",
+        "Не менее 60% обращений закрыто без оператора; ноль выдуманных фактов по заказу; все тикеты с корректной категорией; среднее время первого ответа до пяти секунд."
+      ]
+    },
+    {
+      id: "booking",
+      title: "Запись на услуги",
+      desc: "Показывает свободные слоты, записывает и подтверждает визит.",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 11h18M9 15h2M14 15h2"></path></svg>',
+      values: [
+        "Я администратор сети стоматологических клиник «Дентал Плюс». Помощник нужен, чтобы записывать пациентов на консультацию и первичный приём.",
+        "Взрослые пациенты, которые ищут клинику рядом с домом или работой. Спрашивают цену, сроки, свободные слоты, боятся боли и навязывания дорогих услуг.",
+        "Telegram-бот и виджет на сайте. Интеграция с YCLIENTS для расписания и записи, уведомление администратору в Telegram.",
+        "Поздороваться → уточнить услугу и удобный филиал → предложить два-три свободных слота → записать, собрав имя и телефон → отправить подтверждение и адрес → напомнить о документах.",
+        "Передавать администратору при острой боли, травме, беременности, обращении по ребёнку до 14 лет, вопросах о цене сложного лечения и просьбе связаться с врачом.",
+        "Доброжелательно, спокойно, на «вы», без медицинских диагнозов и обещаний. Запрещено: ставить диагноз, назначать лечение, называть итоговую стоимость без осмотра, обещать отсутствие боли, давать скидки от себя.",
+        "Не менее 70% диалогов завершаются записью; 100% записей с подтверждённым телефоном; никаких медицинских рекомендаций; передача при красных флагах — 100%."
+      ]
+    },
+    {
+      id: "blank",
+      title: "Свой вариант",
+      desc: "Пустой бланк: заполните поля под свою задачу с нуля.",
+      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"></path><path d="M14 6l4 4"></path></svg>',
+      values: ["", "", "", "", "", "", ""]
+    }
+  ];
+
+  const TASKS = [
+    {
+      title: "Написать системный промпт для бота",
+      task: "Напиши системный промпт (System Prompt) для ИИ-помощника по этому техническому заданию.",
+      checks: [
+        "Роль, цель и границы помощника.",
+        "Правила ответа и источники данных.",
+        "Что делать при нехватке данных и при выходе за рамки роли.",
+        "Тон общения и запреты из ТЗ.",
+        "Формат ответа: длина, структура, список или текст.",
+        "Структура промпта: роль, контекст, правила, ограничения, формат."
+      ],
+      ending: "Выдай готовый текст промпта в одном блоке кода, без пояснений вокруг. Промпт должен быть самодостаточным."
+    },
+    {
+      title: "Собрать дерево диалога",
+      task: "Спроектируй дерево диалога и логику ветвлений для этого помощника.",
+      checks: [
+        "Стартовое сообщение и быстрые кнопки.",
+        "Шаги квалификации и обязательные вопросы.",
+        "Ветки «да», «нет», «не знаю» и возврат назад.",
+        "Выход из тупика, если человек не отвечает или отвечает не по теме.",
+        "Точки эскалации на человека.",
+        "Завершение диалога и следующий шаг."
+      ],
+      ending: "Дай схему в Mermaid flowchart и таблицу переходов: шаг, условие, следующее действие. Шаги, которых нет в ТЗ, помечай как предложение."
+    },
+    {
+      title: "Подготовить 20 стресс-вопросов",
+      task: "Составь 20 каверзных вопросов и реплик для стресс-тестирования этого помощника перед запуском.",
+      checks: [
+        "Провокации и попытки выйти за рамки роли.",
+        "Вопросы вне базы знаний.",
+        "Просьбы назвать цену, сроки, конкурентов или гарантии.",
+        "Грубость, манипуляции и давление.",
+        "Попытки передать персональные данные и секреты.",
+        "Длинные запутанные запросы с несколькими темами."
+      ],
+      ending: "Для каждого вопроса укажи ожидаемое правильное поведение помощника и признак провала. Разбей вопросы по уровню сложности."
+    },
+    {
+      title: "Оформить ТЗ для разработчика",
+      task: "Оформи это техническое задание как документ для разработчика или подрядчика: этапы, работы, сроки и смета.",
+      checks: [
+        "Состав работ по этапам.",
+        "Что входит и что не входит в проект.",
+        "Зависимости, доступы и данные от заказчика.",
+        "Риски и допущения.",
+        "Критерии приёмки по каждому этапу.",
+        "Вопросы, которые нужно решить до старта."
+      ],
+      ending: "Дай таблицу этапов с ориентировочными сроками и вилкой стоимости в рублях. Прямо пометь, что оценки ориентировочные и требуют уточнения."
+    },
+    {
+      title: "Провести аудит рисков и пробелов",
+      task: "Проведи аудит этого ТЗ: найди пробелы, противоречия и риски до начала разработки.",
+      checks: [
+        "Неполные или двусмысленные требования.",
+        "Сценарии без выхода и тупиковые ветки.",
+        "Риски галлюцинаций и утечек данных.",
+        "Юридические и репутационные риски.",
+        "Отсутствующие интеграции, доступы и владельцы данных.",
+        "Что обязательно уточнить у заказчика."
+      ],
+      ending: "Сначала дай диагностику по пунктам, затем список уточняющих вопросов. Не переписывай ТЗ целиком."
+    },
+    {
+      title: "Составить регламент базы знаний",
+      task: "Составь регламент подготовки базы знаний для этого помощника.",
+      checks: [
+        "Какие документы и данные нужны.",
+        "Структура и формат материалов.",
+        "Кто отвечает за актуальность.",
+        "Правила версионирования и обновления.",
+        "Что нельзя помещать в базу знаний.",
+        "Как проверять полноту покрытия частых вопросов."
+      ],
+      ending: "Дай чек-лист и шаблон структуры документа базы знаний. Учитывай ограничения из ТЗ."
+    },
+    {
+      title: "Приветствие и первые три шага",
+      task: "Напиши приветственное сообщение и сценарий первых трёх шагов помощника.",
+      checks: [
+        "Ясность цели диалога с первой реплики.",
+        "Тон и обращение из ТЗ.",
+        "Варианты кнопок и быстрых ответов.",
+        "Что делать, если человек не ответил.",
+        "Как не превратить приветствие в длинную анкету."
+      ],
+      ending: "Дай два варианта приветствия, короткий и подробный, набор кнопок и текст для каждого первого шага."
+    }
+  ];
+
+  const DOCS = {
+    policy: {
+      title: "Политика обработки персональных данных",
+      html: `
+        <h3>1. Общие положения</h3>
+        <p>Настоящая Политика определяет порядок обработки персональных данных и меры по обеспечению их безопасности, применяемые Оператором — <b>${OPERATOR.name}</b> (ИНН ${OPERATOR.inn}, ОГРН/ОГРНИП ${OPERATOR.ogrn}, адрес: ${OPERATOR.address}, e-mail: ${OPERATOR.email}; далее — Оператор), при использовании сайта «Конструктор ТЗ для ИИ-помощника» (${SITE}).</p>
+        <p>Политика разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» (далее — 152-ФЗ).</p>
+
+        <h3>2. Состав обрабатываемых данных</h3>
+        <ul>
+          <li><b>Данные формы.</b> Сервис работает полностью в браузере пользователя. Текст, введённый в поля, не передаётся на сервер и не сохраняется Оператором.</li>
+          <li><b>Локальные данные.</b> В localStorage браузера хранятся черновик введённых полей (ключ ${STORAGE_DRAFT}) и отметка о принятии уведомления о локальном хранении (ключ ${STORAGE_COOKIE}). Эти данные не покидают устройство и удаляются кнопкой «Очистить черновик» или средствами браузера.</li>
+          <li><b>Обращения по e-mail.</b> Если пользователь пишет Оператору, обрабатываются имя (если указано), адрес электронной почты, содержание обращения и иные сведения, сообщённые добровольно.</li>
+          <li><b>Технические журналы.</b> Сервер хостинг-провайдера может автоматически фиксировать IP-адрес, дату и время запроса, тип браузера для обеспечения работоспособности и безопасности сайта.</li>
+        </ul>
+
+        <h3>3. Цели обработки</h3>
+        <ul>
+          <li>Ответ на обращения пользователей и поддержка по работе сервиса.</li>
+          <li>Обеспечение работоспособности, безопасности и защиты сайта от злоупотреблений.</li>
+          <li>Исполнение обязанностей, предусмотренных законодательством Российской Федерации.</li>
+        </ul>
+
+        <h3>4. Правовые основания</h3>
+        <ul>
+          <li>Согласие субъекта персональных данных (п. 1 ч. 1 ст. 6 152-ФЗ).</li>
+          <li>Обработка, необходимая для ответа на обращение и исполнения договора, стороной которого является субъект (п. 5 ч. 1 ст. 6 152-ФЗ).</li>
+          <li>Исполнение обязанностей, возложенных на Оператора законом (п. 2 ч. 1 ст. 6 152-ФЗ).</li>
+        </ul>
+
+        <h3>5. Порядок и сроки обработки</h3>
+        <p>Локальные данные формы хранятся в браузере до очистки пользователем. Данные обращений хранятся до достижения цели обработки, но не более трёх лет с даты последнего взаимодействия, либо до отзыва согласия.</p>
+        <p>При достижении целей обработки, истечении срока хранения или отзыве согласия данные уничтожаются способом, исключающим возможность их восстановления.</p>
+
+        <h3>6. Права субъекта персональных данных</h3>
+        <p>Субъект вправе получать сведения об обработке своих данных, требовать их уточнения, блокирования или уничтожения, отозвать согласие, а также обжаловать действия Оператора (ст. 14, 18 и 21 152-ФЗ). Запрос направляется на e-mail ${OPERATOR.email} и рассматривается в срок, установленный законом.</p>
+
+        <h3>7. Передача третьим лицам</h3>
+        <p>Оператор не продаёт и не передаёт персональные данные третьим лицам, кроме случаев, прямо предусмотренных законом. Хостинг-провайдер обрабатывает технические журналы по поручению Оператора и обязан соблюдать конфиденциальность.</p>
+
+        <h3>8. Меры защиты</h3>
+        <p>Оператор принимает правовые, организационные и технические меры защиты в соответствии с ч. 2 ст. 18.1 и ст. 19 152-ФЗ: ограничение доступа, защита канала связи, контроль сроков хранения, назначение ответственного за организацию обработки персональных данных.</p>
+
+        <h3>9. Изменение Политики</h3>
+        <p>Оператор вправе изменять Политику. Новая редакция вступает в силу с момента публикации на этой странице. Действующая редакция: ${EDITED}.</p>
+        <p class="doc-meta">Ответственный за организацию обработки персональных данных: ${OPERATOR.responsible}.</p>
+      `
+    },
+    consent: {
+      title: "Согласие на обработку персональных данных",
+      html: `
+        <p>Я, субъект персональных данных, свободно, своей волей и в своём интересе даю согласие <b>${OPERATOR.name}</b> (ИНН ${OPERATOR.inn}, адрес: ${OPERATOR.address}, e-mail: ${OPERATOR.email}; далее — Оператор) на обработку моих персональных данных на следующих условиях в соответствии со ст. 9 152-ФЗ.</p>
+
+        <h3>Перечень данных</h3>
+        <ul>
+          <li>Имя и адрес электронной почты — если я сообщаю их при обращении.</li>
+          <li>Содержание обращения и приложенные сведения.</li>
+          <li>Сведения, которые я ввожу в форму конструктора (описание проекта, аудитории, каналов и сценариев). Эти сведения обрабатываются в моём браузере и Оператору не передаются.</li>
+          <li>Технические данные: IP-адрес, дата и время запроса, тип браузера — в объёме, необходимом для работы сайта.</li>
+        </ul>
+
+        <h3>Цели обработки</h3>
+        <ul>
+          <li>Ответ на моё обращение и поддержка по работе сервиса.</li>
+          <li>Обеспечение работоспособности и безопасности сайта.</li>
+          <li>Исполнение требований законодательства Российской Федерации.</li>
+        </ul>
+
+        <h3>Действия с данными</h3>
+        <p>Сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, блокирование, удаление и уничтожение. Обработка ведётся автоматизированным способом и без использования средств автоматизации.</p>
+
+        <h3>Срок действия и отзыв</h3>
+        <p>Согласие действует до достижения целей обработки или до его отзыва, но не более трёх лет с даты последнего взаимодействия. Я вправе отозвать согласие в любой момент, направив письмо на ${OPERATOR.email}. После отзыва Оператор прекращает обработку и уничтожает данные в срок, не превышающий 30 дней, если иное не требуется законом.</p>
+
+        <h3>Подтверждение</h3>
+        <p>Проставляя отметку в форме, я подтверждаю, что ознакомлен с Политикой обработки персональных данных и Пользовательским соглашением, а также что указанные мной сведения не содержат персональных данных третьих лиц, кроме случаев, когда у меня есть законное основание для их передачи.</p>
+        <p class="doc-meta">Редакция от ${EDITED}.</p>
+      `
+    },
+    agreement: {
+      title: "Пользовательское соглашение",
+      html: `
+        <h3>1. Общие положения</h3>
+        <p>Настоящее Соглашение регулирует использование сайта «Конструктор ТЗ для ИИ-помощника» (${SITE}), принадлежащего <b>${OPERATOR.name}</b> (далее — Оператор). Используя сайт, пользователь принимает условия Соглашения.</p>
+
+        <h3>2. Предмет</h3>
+        <p>Сервис бесплатно формирует в браузере пользователя черновик технического задания и шаблоны поручений для нейросетей. Сервис не подключается к нейросетям, не хранит пользовательские проекты на сервере и не оказывает услуг по разработке помощников.</p>
+
+        <h3>3. Обязанности пользователя</h3>
+        <ul>
+          <li>Не вводить персональные данные третьих лиц без законного основания и их согласия.</li>
+          <li>Не вводить пароли, платёжные данные, ключи API и иную конфиденциальную информацию.</li>
+          <li>Не использовать сервис для противоправных действий и не нарушать работу сайта.</li>
+          <li>Самостоятельно проверять сформированные тексты перед использованием.</li>
+        </ul>
+
+        <h3>4. Интеллектуальная собственность</h3>
+        <p>Интерфейс, тексты, шаблоны и оформление сайта принадлежат Оператору. Документы, сформированные пользователем на основе его собственных данных, пользователь может использовать свободно, включая коммерческие цели.</p>
+
+        <h3>5. Ограничение ответственности</h3>
+        <p>Сервис предоставляется «как есть». Оператор не гарантирует полноту и применимость сформированных текстов, не отвечает за решения, принятые на их основе, за работу сторонних нейросетей и за утрату черновика, хранящегося в браузере пользователя.</p>
+
+        <h3>6. Персональные данные</h3>
+        <p>Порядок обработки персональных данных определён Политикой обработки персональных данных и Согласием на обработку персональных данных.</p>
+
+        <h3>7. Изменения и споры</h3>
+        <p>Оператор вправе изменять Соглашение, публикуя новую редакцию на этой странице. К отношениям сторон применяется законодательство Российской Федерации. Споры разрешаются путём переговоров, а при недостижении согласия — в суде по месту нахождения Оператора.</p>
+        <p class="doc-meta">Редакция от ${EDITED}.</p>
+      `
+    },
+    cookies: {
+      title: "Cookie и локальное хранение",
+      html: `
+        <p>Сайт не использует серверные cookie, системы веб-аналитики и рекламные трекеры.</p>
+
+        <h3>Что хранится в браузере</h3>
+        <ul>
+          <li><b>${STORAGE_DRAFT}</b> — черновик введённых полей и выбранный шаблон. Нужен, чтобы не потерять текст при случайном закрытии вкладки. Хранится до очистки пользователем или кнопкой «Очистить черновик».</li>
+          <li><b>${STORAGE_COOKIE}</b> — значение «1», отметка о том, что уведомление о локальном хранении показано и принято. Нужна, чтобы не показывать уведомление повторно. Хранится до очистки данных сайта в браузере.</li>
+        </ul>
+
+        <h3>Зачем это нужно</h3>
+        <p>Черновик защищает от потери уже введённого текста. Отметка об уведомлении избавляет от повторяющегося баннера. Обе записи остаются на устройстве пользователя и не передаются на сервер.</p>
+
+        <h3>Как удалить</h3>
+        <ul>
+          <li>Нажать «Очистить черновик» в форме.</li>
+          <li>Удалить данные сайта в настройках браузера.</li>
+          <li>Использовать режим инкогнито: после закрытия окна данные удаляются автоматически.</li>
+        </ul>
+
+        <h3>Согласие и отключение</h3>
+        <p>Нажатие «Понятно» записывает отметку ${STORAGE_COOKIE} и скрывает уведомление. Если запретить сайту использовать localStorage, конструктор продолжит работать, но черновик не сохранится.</p>
+        <p class="doc-meta">Редакция от ${EDITED}.</p>
+      `
+    }
+  };
+
+  const form = document.getElementById("tz-form");
+  const inputs = KEYS.map(function(key){ return document.getElementById(key); });
+  const consent = document.getElementById("consent");
+  const consentWrap = document.getElementById("consent-wrap");
+  const consentError = document.getElementById("consent-error");
+  const result = document.getElementById("result");
+  const output = document.getElementById("tz-output");
+  const copyStatus = document.getElementById("copy-status");
+  const copyButton = document.getElementById("copy-tz");
+  const progress = document.getElementById("progress");
+  const draftStatus = document.getElementById("draft-status");
+  const formStatus = document.getElementById("form-status");
+  const presetGrid = document.getElementById("preset-grid");
+  const taskGrid = document.getElementById("task-grid");
+  const taskModal = document.getElementById("task-modal");
+  const legalModal = document.getElementById("legal-modal");
+  const legalTitle = document.getElementById("legal-title");
+  const legalContent = document.getElementById("legal-content");
+  const taskTitle = document.getElementById("task-title");
+  const taskTz = document.getElementById("task-tz");
+  const taskOutput = document.getElementById("task-output");
+  const taskCopy = document.getElementById("task-copy");
+  const taskCopyStatus = document.getElementById("task-copy-status");
+  const cookieBanner = document.getElementById("cookie-banner");
+
+  let activePreset = null;
+  let selectedTask = TASKS[0];
+  let currentTz = "";
+  let currentTzMd = "";
+  let copyTimer;
+  let taskCopyTimer;
+  let saveTimer;
+  let currentModal = null;
+  let lastFocus = null;
+
+  function prefersReduced(){
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function scrollToEl(el, block){
+    el.scrollIntoView({behavior: prefersReduced() ? "auto" : "smooth", block: block || "start"});
+  }
+
+  function formatWhen(ts){
+    const date = new Date(ts);
+    const now = new Date();
+    const sameDay = date.toDateString() === now.toDateString();
+    if (sameDay) return date.toLocaleTimeString("ru-RU", {hour: "2-digit", minute: "2-digit"});
+    return date.toLocaleString("ru-RU", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"});
+  }
+
+  function setDraftStatus(text){
+    draftStatus.textContent = text || "";
+  }
+
+  function setFormStatus(text){
+    formStatus.textContent = text || "";
+    formStatus.hidden = !text;
+  }
+
+  function setError(input, message){
+    const error = document.getElementById(input.id + "-error");
+    if (!error) return;
+    error.textContent = message || "";
+    error.hidden = !message;
+    if (message) input.setAttribute("aria-invalid", "true");
+    else input.removeAttribute("aria-invalid");
+  }
+
+  function updateProgress(){
+    const filled = REQUIRED.filter(function(index){ return inputs[index].value.trim().length > 0; }).length;
+    progress.textContent = filled === REQUIRED.length
+      ? "Все обязательные поля заполнены"
+      : "Заполнено " + filled + " из " + REQUIRED.length + " обязательных полей";
+    progress.classList.toggle("is-done", filled === REQUIRED.length);
+  }
+
+  function readDraft(){
+    try {
+      const raw = localStorage.getItem(STORAGE_DRAFT);
+      return raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function saveDraft(immediate){
+    clearTimeout(saveTimer);
+    const write = function(){
+      try {
+        if (inputs.every(function(input){ return !input.value.trim(); })) {
+          localStorage.removeItem(STORAGE_DRAFT);
+          setDraftStatus("");
+          return;
+        }
+        const data = {v: 1, preset: activePreset, ts: Date.now(), fields: {}};
+        inputs.forEach(function(input, index){ data.fields[KEYS[index]] = input.value; });
+        localStorage.setItem(STORAGE_DRAFT, JSON.stringify(data));
+        setDraftStatus("Черновик сохранён в " + formatWhen(data.ts));
+      } catch (_) {
+        setDraftStatus("Автосохранение недоступно в этом браузере");
+      }
+    };
+    if (immediate) write();
+    else saveTimer = setTimeout(write, 350);
+  }
+
+  function restoreDraft(){
+    const draft = readDraft();
+    if (!draft || !draft.fields) return;
+    inputs.forEach(function(input, index){
+      const value = draft.fields[KEYS[index]];
+      if (typeof value === "string") input.value = value;
+    });
+    if (draft.preset) {
+      const preset = PRESETS.find(function(item){ return item.id === draft.preset; });
+      if (preset && preset.values.some(Boolean) && preset.values.every(function(value, index){ return value === inputs[index].value; })) {
+        activePreset = preset.id;
+      }
+    }
+    syncPresetButtons();
+    updateProgress();
+    if (inputs.some(function(input){ return input.value.trim(); })) {
+      setDraftStatus("Черновик восстановлен" + (draft.ts ? " (" + formatWhen(draft.ts) + ")" : ""));
+    }
+  }
+
+  function syncPresetButtons(){
+    Array.prototype.forEach.call(presetGrid.querySelectorAll(".preset"), function(button){
+      button.setAttribute("aria-pressed", button.dataset.preset === activePreset ? "true" : "false");
+    });
+  }
+
+  function applyPreset(preset){
+    const hasContent = inputs.some(function(input){ return input.value.trim(); });
+    const isBlank = !preset.values.some(Boolean);
+    if (hasContent) {
+      const question = isBlank
+        ? "Очистить все поля и начать с пустого бланка?"
+        : "Заменить введённые данные шаблоном «" + preset.title + "»?";
+      if (!window.confirm(question)) return;
+    }
+    inputs.forEach(function(input, index){
+      input.value = preset.values[index] || "";
+      setError(input, "");
+    });
+    activePreset = preset.id;
+    syncPresetButtons();
+    invalidateResult();
+    saveDraft(true);
+    updateProgress();
+    setFormStatus(isBlank
+      ? "Поля очищены. Заполните их под свой проект."
+      : "Шаблон «" + preset.title + "» подставлен. Проверьте текст и поправьте под свой проект.");
+    scrollToEl(document.getElementById("form-card"));
+  }
+
+  function buildPresets(){
+    PRESETS.forEach(function(preset){
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "preset";
+      button.dataset.preset = preset.id;
+      button.setAttribute("aria-pressed", "false");
+
+      const icon = document.createElement("span");
+      icon.className = "preset-icon";
+      icon.innerHTML = preset.icon;
+
+      const text = document.createElement("span");
+      const title = document.createElement("span");
+      title.className = "preset-title";
+      title.textContent = preset.title;
+      const desc = document.createElement("span");
+      desc.className = "preset-desc";
+      desc.textContent = preset.desc;
+      text.append(title, desc);
+
+      button.append(icon, text);
+      button.addEventListener("click", function(){ applyPreset(preset); });
+      presetGrid.append(button);
+    });
+  }
+
+  function buildTzText(values){
+    return "ТЕХНИЧЕСКОЕ ЗАДАНИЕ НА ИИ-ПОМОЩНИКА\n\n"
+      + "Ниже требования к разработке и запуску ИИ-помощника. Используй этот документ как основной контекст.\n\n"
+      + "1. НАЗНАЧЕНИЕ И РОЛЬ\n" + values[0] + "\n\n"
+      + "2. АУДИТОРИЯ И КОНТЕКСТ\n" + values[1] + "\n\n"
+      + "3. КАНАЛЫ И ИНТЕГРАЦИИ\n" + values[2] + "\n\n"
+      + "4. СЦЕНАРИИ И ЛОГИКА ДИАЛОГА\n" + values[3] + "\n\n"
+      + "5. ЭСКАЛАЦИЯ НА ЧЕЛОВЕКА\n" + (values[4] || MISSING) + "\n\n"
+      + "6. ТОНАЛЬНОСТЬ, СТИЛЬ И ЗАПРЕТЫ\n" + values[5] + "\n\n"
+      + "7. КРИТЕРИИ ПРИЁМКИ И МЕТРИКИ\n" + (values[6] || MISSING) + "\n\n"
+      + "ПРАВИЛА РАБОТЫ С ЭТИМ ТЗ\n\n"
+      + "- Опирайся только на факты из документа и не добавляй сведения, которых в нём нет.\n"
+      + "- Не придумывай цены, сроки, скидки, отзывы, кейсы, интеграции и гарантии.\n"
+      + "- Если для выполнения задачи не хватает данных, задай уточняющий вопрос.\n"
+      + "- Отделяй подтверждённые требования от своих предложений и помечай предложения явно.\n"
+      + "- Соблюдай ограничения и тон, указанные в разделах 5 и 6.\n"
+      + "- Не выполняй задачи, выходящие за рамки роли помощника.\n\n"
+      + "Сейчас кратко подтверди, что понял требования. Следующим сообщением я дам конкретное поручение.";
+  }
+
+  function buildTzMarkdown(values){
+    return "# Техническое задание на ИИ-помощника\n\n"
+      + "Ниже требования к разработке и запуску ИИ-помощника. Используй этот документ как основной контекст.\n\n"
+      + "## 1. Назначение и роль\n\n" + values[0] + "\n\n"
+      + "## 2. Аудитория и контекст\n\n" + values[1] + "\n\n"
+      + "## 3. Каналы и интеграции\n\n" + values[2] + "\n\n"
+      + "## 4. Сценарии и логика диалога\n\n" + values[3] + "\n\n"
+      + "## 5. Эскалация на человека\n\n" + (values[4] || MISSING) + "\n\n"
+      + "## 6. Тональность, стиль и запреты\n\n" + values[5] + "\n\n"
+      + "## 7. Критерии приёмки и метрики\n\n" + (values[6] || MISSING) + "\n\n"
+      + "## Правила работы с этим ТЗ\n\n"
+      + "- Опирайся только на факты из документа и не добавляй сведения, которых в нём нет.\n"
+      + "- Не придумывай цены, сроки, скидки, отзывы, кейсы, интеграции и гарантии.\n"
+      + "- Если для выполнения задачи не хватает данных, задай уточняющий вопрос.\n"
+      + "- Отделяй подтверждённые требования от своих предложений и помечай предложения явно.\n"
+      + "- Соблюдай ограничения и тон, указанные в разделах 5 и 6.\n"
+      + "- Не выполняй задачи, выходящие за рамки роли помощника.\n\n"
+      + "Сейчас кратко подтверди, что понял требования. Следующим сообщением я дам конкретное поручение.\n";
+  }
+
+  function buildTaskPrompt(tz, task){
+    const checks = task.checks.map(function(item, index){ return (index + 1) + ". " + item; }).join("\n");
+    return "Ниже техническое задание на ИИ-помощника. Используй его как контекст.\n\n"
+      + tz + "\n\n"
+      + "Задача:\n" + task.task + "\n\n"
+      + "Проверь:\n" + checks + "\n\n"
+      + task.ending + "\n\n"
+      + "Работай только с тем, что есть в ТЗ. Не придумывай цены, сроки, отзывы, интеграции и гарантии, которых там нет. Если данных не хватает, сначала задай вопросы.";
+  }
+
+  function rebuildTask(){
+    if (!selectedTask) return;
+    taskOutput.value = buildTaskPrompt(taskTz.value.trim(), selectedTask);
+    taskOutput.setSelectionRange(0, 0);
+    taskOutput.scrollTop = 0;
+    taskCopyStatus.textContent = "";
+    taskCopy.textContent = "Скопировать поручение";
+  }
+
+  function invalidateResult(){
+    if (result.hidden && !output.value) return;
+    result.hidden = true;
+    output.value = "";
+    currentTz = "";
+    currentTzMd = "";
+    copyStatus.textContent = "";
+    copyButton.textContent = "Скопировать ТЗ";
+    closeModal(true);
+    clearTimeout(copyTimer);
+    clearTimeout(taskCopyTimer);
+  }
+
+  function trapFocus(event){
+    if (!currentModal || event.key !== "Tab") return;
+    const focusable = Array.prototype.filter.call(
+      currentModal.querySelectorAll("button:not([disabled]), a[href], textarea, input, select, [tabindex]:not([tabindex='-1'])"),
+      function(el){ return el.offsetParent !== null || el === document.activeElement; }
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function openModal(modal, focusTarget){
+    if (currentModal && currentModal !== modal) {
+      currentModal.hidden = true;
+    } else if (!currentModal) {
+      lastFocus = document.activeElement;
+    }
+    currentModal = modal;
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    const target = focusTarget || modal;
+    if (target && typeof target.focus === "function") target.focus({preventScroll: true});
+  }
+
+  function closeModal(silent){
+    if (!currentModal) return;
+    currentModal.hidden = true;
+    currentModal = null;
+    document.body.classList.remove("modal-open");
+    const previous = lastFocus;
+    lastFocus = null;
+    if (!silent && previous && typeof previous.focus === "function") previous.focus({preventScroll: true});
+  }
+
+  function openDoc(key){
+    const doc = DOCS[key];
+    if (!doc) return;
+    legalTitle.textContent = doc.title;
+    legalContent.innerHTML = doc.html;
+    legalModal.querySelector(".modal-card").scrollTop = 0;
+    openModal(legalModal, legalTitle);
+  }
+
+  async function copyTextWithFallback(text, textarea){
+    let copied = false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      }
+    } catch (_) {}
+    if (!copied && textarea) {
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+      try {
+        copied = typeof document.execCommand === "function" && document.execCommand("copy");
+      } catch (_) {
+        copied = false;
+      }
+    }
+    return copied;
+  }
+
+  function downloadText(filename, text){
+    const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+  }
+
+  function openTask(task){
+    if (result.hidden || !output.value) return;
+    selectedTask = task;
+    taskTitle.textContent = task.title;
+    taskTz.value = output.value;
+    rebuildTask();
+    openModal(taskModal, taskTitle);
+  }
+
+  function buildTasks(){
+    TASKS.forEach(function(task, index){
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "task-button";
+      const marker = document.createElement("span");
+      marker.className = "task-index";
+      marker.textContent = String(index + 1);
+      const text = document.createElement("span");
+      text.className = "task-text";
+      text.textContent = task.title;
+      button.append(marker, text);
+      button.addEventListener("click", function(){ openTask(task); });
+      taskGrid.append(button);
+    });
+  }
+
+  inputs.forEach(function(input){
+    input.addEventListener("input", function(){
+      invalidateResult();
+      if (input.value.trim()) setError(input, "");
+      if (activePreset) {
+        activePreset = null;
+        syncPresetButtons();
+      }
+      updateProgress();
+      saveDraft();
+      setFormStatus("");
+    });
+  });
+
+  consent.addEventListener("change", function(){
+    if (consent.checked) {
+      consentWrap.classList.remove("invalid");
+      consentError.hidden = true;
+    }
+  });
+
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    invalidateResult();
+    const values = inputs.map(function(input){ return input.value.trim(); });
+    let firstInvalid = null;
+
+    inputs.forEach(function(input, index){
+      const invalid = REQUIRED.indexOf(index) !== -1 && !values[index];
+      setError(input, invalid ? "Заполните поле, чтобы собрать ТЗ." : "");
+      if (invalid && !firstInvalid) firstInvalid = input;
+    });
+
+    const consentOk = consent.checked;
+    consentWrap.classList.toggle("invalid", !consentOk);
+    consentError.hidden = consentOk;
+    if (!consentOk && !firstInvalid) firstInvalid = consent;
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      scrollToEl(firstInvalid, "center");
+      return;
+    }
+
+    currentTz = buildTzText(values);
+    currentTzMd = buildTzMarkdown(values);
+    output.value = currentTz;
+    output.setSelectionRange(0, 0);
+    output.scrollTop = 0;
+    copyStatus.textContent = "";
+    copyButton.textContent = "Скопировать ТЗ";
+    result.hidden = false;
+    setFormStatus("");
+    saveDraft(true);
+    const heading = document.getElementById("result-title");
+    heading.focus({preventScroll: true});
+    scrollToEl(result);
+  });
+
+  copyButton.addEventListener("click", async function(){
+    if (result.hidden || !currentTz) return;
+    clearTimeout(copyTimer);
+    copyButton.textContent = "Скопировать ТЗ";
+    copyStatus.textContent = "";
+    const copied = await copyTextWithFallback(currentTz, output);
+    if (result.hidden || output.value !== currentTz) return;
+    if (copied) {
+      copyButton.textContent = "Скопировано";
+      copyStatus.textContent = "ТЗ скопировано. Вставьте его в чат с нейросетью.";
+      copyTimer = setTimeout(function(){ copyButton.textContent = "Скопировать ТЗ"; }, 2200);
+    } else {
+      output.focus();
+      output.select();
+      copyStatus.textContent = "Не удалось скопировать автоматически. Текст выделен: скопируйте его вручную.";
+    }
+  });
+
+  document.getElementById("download-txt").addEventListener("click", function(){
+    if (result.hidden || !currentTz) return;
+    downloadText("tz-ii-pomoshchnik.txt", currentTz);
+  });
+
+  document.getElementById("download-md").addEventListener("click", function(){
+    if (result.hidden || !currentTzMd) return;
+    downloadText("tz-ii-pomoshchnik.md", currentTzMd);
+  });
+
+  document.getElementById("clear-draft").addEventListener("click", function(){
+    const hasContent = inputs.some(function(input){ return input.value.trim(); });
+    if (hasContent && !window.confirm("Очистить все поля и удалить черновик из этого браузера?")) return;
+    inputs.forEach(function(input){
+      input.value = "";
+      setError(input, "");
+    });
+    consent.checked = false;
+    consentWrap.classList.remove("invalid");
+    consentError.hidden = true;
+    activePreset = null;
+    syncPresetButtons();
+    invalidateResult();
+    setFormStatus("");
+    updateProgress();
+    try { localStorage.removeItem(STORAGE_DRAFT); } catch (_) {}
+    setDraftStatus("Черновик очищен");
+    inputs[0].focus({preventScroll: true});
+  });
+
+  taskTz.addEventListener("input", rebuildTask);
+
+  taskCopy.addEventListener("click", async function(){
+    if (!taskOutput.value) return;
+    clearTimeout(taskCopyTimer);
+    taskCopy.textContent = "Скопировать поручение";
+    taskCopyStatus.textContent = "";
+    const copied = await copyTextWithFallback(taskOutput.value, taskOutput);
+    if (copied) {
+      taskCopy.textContent = "Скопировано";
+      taskCopyStatus.textContent = "Поручение скопировано. Вставьте его в чат с нейросетью.";
+      taskCopyTimer = setTimeout(function(){ taskCopy.textContent = "Скопировать поручение"; }, 2200);
+    } else {
+      taskOutput.focus();
+      taskOutput.select();
+      taskCopyStatus.textContent = "Не удалось скопировать автоматически. Текст выделен: скопируйте его вручную.";
+    }
+  });
+
+  document.getElementById("task-download").addEventListener("click", function(){
+    if (!taskOutput.value) return;
+    downloadText("poruchenie-dlya-ii.txt", taskOutput.value);
+  });
+
+  document.querySelectorAll("[data-doc]").forEach(function(link){
+    link.addEventListener("click", function(event){
+      event.preventDefault();
+      openDoc(link.getAttribute("data-doc"));
+    });
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(function(el){
+    el.addEventListener("click", function(){ closeModal(); });
+  });
+
+  document.addEventListener("keydown", function(event){
+    if (event.key === "Escape" && currentModal) {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+    trapFocus(event);
+  });
+
+  document.getElementById("cookie-ok").addEventListener("click", function(){
+    try { localStorage.setItem(STORAGE_COOKIE, "1"); } catch (_) {}
+    cookieBanner.hidden = true;
+    document.body.classList.remove("has-cookie");
+  });
+
+  function initCookieBanner(){
+    let seen = false;
+    try { seen = localStorage.getItem(STORAGE_COOKIE) === "1"; } catch (_) { seen = true; }
+    if (seen) return;
+    cookieBanner.hidden = false;
+    document.body.classList.add("has-cookie");
+  }
+
+  function renderOperator(){
+    document.getElementById("op-name").textContent = OPERATOR.name;
+    document.getElementById("op-inn").textContent = OPERATOR.inn;
+    document.getElementById("op-short").textContent = OPERATOR.short;
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+    const email = document.getElementById("op-email");
+    if (OPERATOR.email.indexOf("@") !== -1 && OPERATOR.email.charAt(0) !== "[") {
+      const link = document.createElement("a");
+      link.id = "op-email";
+      link.href = "mailto:" + OPERATOR.email;
+      link.textContent = OPERATOR.email;
+      email.replaceWith(link);
+    } else {
+      email.textContent = OPERATOR.email;
+    }
+  }
+
+  buildPresets();
+  buildTasks();
+  renderOperator();
+  restoreDraft();
+  syncPresetButtons();
+  initCookieBanner();
+})();
+</script>
+</body>
+</html>

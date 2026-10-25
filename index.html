@@ -361,7 +361,9 @@ footer{padding:30px 6px 0;color:var(--muted);font-size:13px}
     email: "viktor260566@gmail.com",
     responsible: "ИП Сметанин Виктор Александрович"
   };
-  const SITE = "https://aismetanin.ru/konstruktor-tz/";
+  const SITE = (location.protocol === "http:" || location.protocol === "https:")
+    ? location.origin + location.pathname.replace(/index\.html$/, "")
+    : "https://aismetanin.ru/konstruktor-tz/";
   const STORAGE_DRAFT = "tzAiDraftV1";
   const STORAGE_COOKIE = "tzAiCookieAckV1";
   const EDITED = "25 октября 2026 г.";
